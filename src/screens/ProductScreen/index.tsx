@@ -1,16 +1,24 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import product from '../../data/product';
 import productStyles from './productStyles';
 import {Picker} from '@react-native-picker/picker';
 import QuantitySelector from '../../components/QuantitySelector';
+import Button from '../../components/Button';
+import ImageCarousel from '../../components/ImageCarousel';
 
 const ProductScreen = () => {
-  const [selectedOption, setSelectedOption] = useState(product.options[0]);
+  const [selectedOption, setSelectedOption] = useState(
+    product.options ? product.options[0] : null,
+  );
+  const [quantity, setQuantity] = useState(1);
+
   console.log(selectedOption);
   return (
-    <View>
+    <ScrollView style={productStyles.root}>
       <Text style={productStyles.title}>{product.title}</Text>
+
+      <ImageCarousel images={product.images} />
 
       <Picker
         selectedValue={selectedOption}
@@ -28,8 +36,11 @@ const ProductScreen = () => {
       </Text>
       <Text style={productStyles.description}>{product.description}</Text>
 
-      <QuantitySelector />
-    </View>
+      <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+
+      <Button text={'Add to cart'} onPress={() => {}} />
+      <Button text={'Buy Now'} onPress={() => {}} />
+    </ScrollView>
   );
 };
 

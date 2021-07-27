@@ -1,0 +1,45 @@
+import React from 'react';
+import {View, StyleSheet, FlatList, Text} from 'react-native';
+import CartProductItem from '../../components/CartProductItem';
+import Button from '../../components/Button';
+import styles from './style';
+import cart from '../../data/cart';
+
+const ShoppingCartScreen = () => {
+  const totalPrice = cart.reduce(
+    (summedPrice, product) =>
+      summedPrice + product.item.price * product.quantity,
+    0,
+  );
+
+  return (
+    <View style={styles.page}>
+      <View>
+        <Text style={{fontSize: 18}}>
+          Subtotal ({cart.length} items):{' '}
+          <Text style={{color: '#eb3c10', fontWeight: 'bold'}}>
+            ${totalPrice.toFixed(2)}
+          </Text>
+        </Text>
+
+        <Button
+          text="Proceed to checkout"
+          onPress={() => console.log('go to checkout')}
+        />
+      </View>
+
+      <FlatList
+        data={cart}
+        renderItem={({item}) => <CartProductItem cartItem={item} />}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  page: {
+    padding: 5,
+  },
+});
+
+export default ShoppingCartScreen;
