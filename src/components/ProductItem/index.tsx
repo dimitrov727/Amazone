@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import styles from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 interface ProductItemProps {
   item: {
@@ -15,10 +16,19 @@ interface ProductItemProps {
   };
 }
 
-const ProductItem = (props: ProductItemProps) => {
-  const item = props.item;
+const ProductItem = ({item}: ProductItemProps) => {
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    console.log('pressed');
+    navigation.navigate('ProductScreen', {id: item.id});
+  };
+
+  const route = useRoute();
+  console.log(route.params);
+
   return (
-    <View style={styles.root}>
+    <Pressable style={styles.root} onPress={onPress}>
       <Image style={styles.img} source={{uri: item.image}} />
       <View style={styles.rightContainer}>
         <Text style={styles.title} numberOfLines={3}>
@@ -45,7 +55,7 @@ const ProductItem = (props: ProductItemProps) => {
           )}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

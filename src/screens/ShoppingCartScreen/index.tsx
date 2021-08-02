@@ -1,11 +1,18 @@
 import React from 'react';
-import {View, StyleSheet, FlatList, Text} from 'react-native';
+import {View, StyleSheet, FlatList, Text, Pressable} from 'react-native';
 import CartProductItem from '../../components/CartProductItem';
 import Button from '../../components/Button';
 import styles from './style';
 import cart from '../../data/cart';
+import {useNavigation} from '@react-navigation/native';
 
 const ShoppingCartScreen = () => {
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate('AddressScreen');
+  };
+
   const totalPrice = cart.reduce(
     (summedPrice, product) =>
       summedPrice + product.item.price * product.quantity,
@@ -22,10 +29,7 @@ const ShoppingCartScreen = () => {
           </Text>
         </Text>
 
-        <Button
-          text="Proceed to checkout"
-          onPress={() => console.log('go to checkout')}
-        />
+        <Button text="Proceed to checkout" onPress={onPress  } />
       </View>
 
       <FlatList
@@ -35,11 +39,5 @@ const ShoppingCartScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  page: {
-    padding: 5,
-  },
-});
 
 export default ShoppingCartScreen;

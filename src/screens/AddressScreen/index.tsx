@@ -25,7 +25,7 @@ const AddressScreen = () => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'android' ? 'padding' : 'height'}
+      // behavior={Platform.OS === 'android' ? '10' : '0'}
       keyboardVerticalOffset={Platform.OS === 'android' ? 10 : 0}>
       <ScrollView style={styles.root}>
         <View style={styles.row}>

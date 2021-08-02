@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   row: {
-    marginVertical: 40,
+    marginVertical: 20,
   },
   label: {fontWeight: 'bold'},
   input: {

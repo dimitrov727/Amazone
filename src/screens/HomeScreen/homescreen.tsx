@@ -3,7 +3,8 @@ import {ScrollView, StyleSheet, FlatList} from 'react-native';
 import ProductItem from '../../components/ProductItem';
 import products from '../../data/products';
 
-const HomeScreen = () => {
+const HomeScreen = ({searchValue}: {searchValue: string}) => {
+  console.log(searchValue);
   return (
     <ScrollView style={styles.page}>
       {/* <ProductItem item={products[0]} /> */}
